@@ -25,7 +25,7 @@ A powerful Minecraft plugin that transforms your server into a blob storage HTTP
 
 ### 2. Building from Source
 
-\`\`\`bash
+```bash
 # Clone the repository
 git clone https://github.com/ArubikU/blobcraft.git
 cd blobcraft
@@ -34,13 +34,13 @@ cd blobcraft
 ./gradlew shadowJar
 
 # The JAR file will be in build/libs/
-\`\`\`
+```
 
 ### 3. Configuration
 
 Edit `plugins/BlobCraft/config.yml`:
 
-\`\`\`yaml
+```yaml
 # HTTP Server Settings
 port: 9090
 bind-address: "0.0.0.0"
@@ -64,20 +64,20 @@ compress-threshold: 1024
 enable-dashboard: true
 dashboard-path: "/dashboard"
 dashboard-auth: true
-\`\`\`
+```
 
 ## 📡 API Reference
 
 ### Base URL
-\`\`\`
+```
 http://localhost:9090
-\`\`\`
+```
 
 ### Authentication
 All private endpoints require the `Authorization` header:
-\`\`\`
+```
 Authorization: Bearer your-secret-key
-\`\`\`
+```
 
 ### Endpoints
 
@@ -103,50 +103,50 @@ Authorization: Bearer your-secret-key
 ### Examples
 
 #### Upload a file
-\`\`\`bash
+```bash
 curl -X POST http://localhost:9090/upload \
   -H "Authorization: Bearer your-secret-key" \
   -H "X-Filename: example.txt" \
   -H "X-Public: true" \
   -H "X-TTL: 3600" \
   --data-binary @file.txt
-\`\`\`
+```
 
 #### List files
-\`\`\`bash
+```bash
 curl "http://localhost:9090/list?page=1&pageSize=10" \
   -H "Authorization: Bearer your-secret-key"
-\`\`\`
+```
 
 #### Download a file
-\`\`\`bash
+```bash
 # Public file
 curl http://localhost:9090/public/abc123def456
 
 # Private file
 curl http://localhost:9090/blob/abc123def456 \
   -H "Authorization: Bearer your-secret-key"
-\`\`\`
+```
 
 #### Delete a file
-\`\`\`bash
+```bash
 curl -X DELETE http://localhost:9090/delete/abc123def456 \
   -H "Authorization: Bearer your-secret-key"
-\`\`\`
+```
 
 ## 🎯 TypeScript Client
 
 ### Installation
 
-\`\`\`bash
+```bash
 cd client
 npm install
 npm run build
-\`\`\`
+```
 
 ### Usage
 
-\`\`\`typescript
+```typescript
 import { BlobCraftClient, createBlobCraftClient } from 'blobcraft-client';
 
 // Create client
@@ -166,11 +166,11 @@ const content = await client.downloadFileAsText(result.id, true);
 
 // Delete file
 await client.deleteFile(result.id);
-\`\`\`
+```
 
 ### Browser Usage
 
-\`\`\`html
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -193,11 +193,11 @@ await client.deleteFile(result.id);
     </script>
 </body>
 </html>
-\`\`\`
+```
 
 ### Node.js Usage
 
-\`\`\`javascript
+```javascript
 const { BlobCraftNodeClient } = require('blobcraft-client');
 
 const client = new BlobCraftNodeClient('http://localhost:9090', 'your-secret-key');
@@ -212,7 +212,7 @@ async function example() {
     // Download to file system
     await client.downloadFileToPath(result.id, './downloaded.txt', false);
 }
-\`\`\`
+```
 
 ## 🌐 Web Dashboard
 
@@ -269,7 +269,7 @@ The dashboard provides:
 ## 🔧 Development
 
 ### Project Structure
-\`\`\`
+```
 blobcraft/
 ├── src/main/java/dev/arubik/blobcraft/
 │   ├── Main.java                    # Plugin main class
@@ -287,11 +287,11 @@ blobcraft/
 │   └── tsconfig.json              # TypeScript configuration
 ├── build.gradle.kts               # Build configuration
 └── README.md                      # This file
-\`\`\`
+```
 
 ### Building
 
-\`\`\`bash
+```bash
 # Build plugin
 ./gradlew shadowJar
 
@@ -302,7 +302,7 @@ npm run build
 # Run tests
 ./gradlew test
 cd client && npm test
-\`\`\`
+```
 
 ## 🤝 Contributing
 
