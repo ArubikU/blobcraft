@@ -1,0 +1,22 @@
+name: BlobCraft
+version: ${version}
+main: ${main}
+api-version: 1.20
+author: Arubik
+description: Minecraft Blob Storage HTTP Server Plugin
+website: https://github.com/arubik/blobcraft
+
+commands:
+  blobcraft:
+    description: BlobCraft plugin commands
+    usage: /blobcraft <reload|status|info>
+    permission: blobcraft.admin
+    aliases: [bc, blob]
+
+permissions:
+  blobcraft.admin:
+    description: Access to BlobCraft admin commands
+    default: op
+  blobcraft.use:
+    description: Basic BlobCraft usage
+    default: true
