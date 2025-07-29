@@ -41,29 +41,156 @@ cd blobcraft
 Edit `plugins/BlobCraft/config.yml`:
 
 ```yaml
-# HTTP Server Settings
-port: 9090
-bind-address: "0.0.0.0"
-access-key: "your-secret-key-here"
+# BlobCraft Configuration File
+# File storage and HTTP server settings for Minecraft plugin
 
-# Storage Settings
-max-ram: 536870912      # 512MB
-max-storage: 1073741824 # 1GB
+# Server Configuration
+server:
+  # Network settings
+  port: 9090                    # HTTP server port
+  bind-address: "0.0.0.0"      # Bind address (0.0.0.0 for all interfaces, 127.0.0.1 for localhost only)
+  access-key: "your-secret-key-here" # API access key for authentication
+  
+  # Performance settings
+  max-threads: 10               # Maximum HTTP server threads
+  enable-cors: true             # Enable CORS headers for web browser access
+  log-requests: true            # Log all HTTP requests
+  
+  # Timeout settings (in milliseconds)
+  read-timeout: 30000           # 30 seconds
+  write-timeout: 30000          # 30 seconds
+  idle-timeout: 60000           # 60 seconds
+  
+  # Request limits
+  max-request-size: 104857600   # 100MB for regular uploads
+  
+  # Rate limiting
+  rate-limit:
+    enabled: false              # Enable rate limiting
+    requests: 100               # Max requests per window
+    window: 60                  # Time window in seconds
 
-# File Expiration
-enable-expiration: true
-default-ttl: 86400      # 24 hours
-max-ttl: 604800         # 7 days
+# Storage Configuration
+storage:
+  # Memory and disk limits
+  max-ram: 1073741824          # 1GB RAM limit (0 = unlimited)
+  max-storage: 10737418240     # 10GB storage limit (0 = unlimited)
+  
+  # File settings
+  max-file-size: 5368709120    # 5GB max file size
+  compression:
+    enabled: true              # Enable file compression
+    threshold: 1024            # Compress files larger than 1KB
+    level: 6                   # Compression level (1-9)
+  
+  # File expiration
+  default-ttl: 0               # 30 days default TTL (0 = no expiration)
+  cleanup-interval: 300        # Cleanup expired files every 5 minutes
 
-# Compression
-enable-compression: true
-compression-level: 6
-compress-threshold: 1024
+# Chunked Upload Configuration
+chunked-upload:
+  enabled: true                # Enable chunked upload support
+  chunk-size: 12582912         # 12MB chunk size
+  max-chunks: 1000            # Maximum chunks per upload
+  upload-timeout: 3600        # Upload timeout in seconds (1 hour)
+  temp-dir: "temp/uploads"    # Temporary directory for chunks
+  
+  # Progress tracking
+  progress:
+    enabled: true             # Enable progress tracking
+    update-interval: 1000     # Progress update interval in milliseconds
+  
+  # Maximum upload session duration in seconds
+  max-session-duration: 3600
+  
+  # Cleanup interval for expired upload sessions in seconds
+  cleanup-interval: 300
+  
+  # Maximum concurrent uploads per IP
+  max-concurrent-per-ip: 3
 
-# Web Dashboard
-enable-dashboard: true
-dashboard-path: "/dashboard"
-dashboard-auth: true
+# Dashboard Configuration
+dashboard:
+  enabled: true               # Enable web dashboard
+  path: "/dashboard"          # Dashboard URL path
+  require-auth: true          # Require authentication for dashboard
+  
+  # Dashboard features
+  show-stats: true            # Show server statistics
+  show-files: true            # Show file list
+  allow-upload: true          # Allow file upload from dashboard
+  allow-delete: true          # Allow file deletion from dashboard
+
+# File Management
+files:
+  # Allowed file types (empty = all types allowed)
+  allowed-extensions: []
+  
+  # Blocked file types
+  blocked-extensions:
+    - "exe"
+    - "bat"
+    - "cmd"
+    - "scr"
+    - "com"
+    - "pif"
+  
+  # File naming
+  preserve-names: true        # Preserve original filenames
+  sanitize-names: true        # Sanitize filenames (remove special chars)
+  
+  # Metadata
+  store-metadata: true        # Store file metadata
+  store-uploader-info: true   # Store uploader IP and user agent
+  
+  # Default list limit (maximum files returned in one request)
+  list-limit: 100
+  
+  # Maximum filename length
+  max-filename-length: 255
+
+# Security Configuration
+security:
+  # API Security
+  require-auth: true          # Require authentication for API
+  allow-public-files: true    # Allow public file access
+  
+  # Upload restrictions
+  max-uploads-per-ip: 100     # Max uploads per IP per hour
+  scan-uploads: false         # Scan uploads for malware (requires external tool)
+  
+  # CORS settings
+  cors:
+    enabled: true
+    allowed-origins: ["*"]
+    allowed-methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+    allowed-headers: ["Content-Type", "Authorization", "X-Filename", "X-Public", "X-TTL"]
+  
+  # Enable IP whitelist
+  ip-whitelist-enabled: false
+  
+  # Allowed IP addresses (when whitelist is enabled)
+  allowed-ips: []
+  
+  # Enable user agent filtering
+  user-agent-filtering: false
+  
+  # Blocked user agents (regex patterns)
+  blocked-user-agents: []
+
+# Logging Configuration
+logging:
+  level: "INFO"               # Log level (DEBUG, INFO, WARN, ERROR)
+  file-operations: true       # Log file operations
+  http-requests: true         # Log HTTP requests
+  errors: true                # Log errors
+  performance: false          # Log performance metrics
+  
+  # Log upload details
+  log-uploads: true
+  
+  # Log download details
+  log-downloads: false
 ```
 
 ## 📡 API Reference

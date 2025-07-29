@@ -148,14 +148,3 @@ logging:
   
   # Log download details
   log-downloads: false
-
-# Plugin Integration
-plugin:
-  # Minecraft integration
-  broadcast-uploads: false    # Broadcast file uploads to server
-  command-prefix: "blobcraft" # Command prefix
-  
-  # Permissions
-  upload-permission: "blobcraft.upload"
-  delete-permission: "blobcraft.delete"
-  admin-permission: "blobcraft.admin"
