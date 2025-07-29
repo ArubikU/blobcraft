@@ -27,7 +27,7 @@ A powerful Minecraft plugin that transforms your server into a blob storage HTTP
 
 \`\`\`bash
 # Clone the repository
-git clone https://github.com/arubik/blobcraft.git
+git clone https://github.com/ArubikU/blobcraft.git
 cd blobcraft
 
 # Build the plugin
@@ -318,9 +318,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🐛 Issues & Support
 
-- Report bugs: [GitHub Issues](https://github.com/arubik/blobcraft/issues)
-- Feature requests: [GitHub Discussions](https://github.com/arubik/blobcraft/discussions)
-- Documentation: [Wiki](https://github.com/arubik/blobcraft/wiki)
+- Report bugs: [GitHub Issues](https://github.com/ArubikU/blobcraft/issues)
+- Feature requests: [GitHub Discussions](https://github.com/ArubikU/blobcraft/discussions)
+- Documentation: [Wiki](https://github.com/ArubikU/blobcraft/wiki) (WIP)
 
 ## 🎯 Use Cases
 
